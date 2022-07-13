@@ -104,6 +104,11 @@ _Follow the steps as shown below._
    ```sh
    DATABASE_CONNECTION
    ```
+4. Start application with next command
+   ```sh
+   npm run start-dev
+   ```
+5. Test your API. _please view the 'Usage' section in your local environment_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -34,6 +34,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#continuous-integration">Continuous Integration</a></li>
+    <li><a href="#testing-and-coverage">Testing and Coverage</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#design-decisions">Design Decisions</a></li>
@@ -100,6 +102,24 @@ _Follow the steps as shown below._
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Continuous Integration
+
+[![Product Name Screen Shot][ci-cd-screenshot]](https://github.com/efarias04/mutant-meli-app/actions/runs/2661832800)
+
+This app is integrated with continuous delivery from GitHub Actions and Heroku. ✅
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Testing and Coverage
+
+![Product Name Screen Shot][test1-screenshot]
+![Product Name Screen Shot][test2-screenshot]
+
+
+This application has unit tests and coverage of more than 96%. ✅
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -158,6 +178,9 @@ Distributed under the MIT License.
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/efarias04
 [product-screenshot]: static/principal.jpg
+[ci-cd-screenshot]: static/ci.png
+[test1-screenshot]: static/test1.png
+[test2-screenshot]: static/test2.png
 [Node.js]: https://img.shields.io/badge/node.js-000000?style=for-the-badge&logo=nodedotjs&logoColor=green
 [Node-url]: https://nodejs.org/es/
 [MongoDB]: https://img.shields.io/badge/mongodb-000000?style=for-the-badge&logo=mongodb&logoColor=green

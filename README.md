@@ -151,7 +151,7 @@ _Follow the steps as shown below._
         ]
     }'
    ```
-* cURL GET _/stats_ DNA [ Local ]
+* cURL GET _/stats_ DNA [ Cloud Platform ]
    ```bash
    curl --location --request GET 'https://mutant-meli-app.herokuapp.com/stats'
     ```

@@ -1,0 +1,343 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "MutantValidatorOpenAPI",
+        "version": "1.0.0",
+        "description": "API para la validación de potenciales mutantes"
+    },
+    "servers": [
+        {
+            "url": "https://api.your-host.com/{basePath}",
+            "variables": {
+                "basePath": {
+                    "default": "your-resource"
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/stats": {
+            "summary": "Consulta de estadísticas de mutantes",
+            "description": "Recurso que realiza una estadística sencilla para validar el histórico de análisis.",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "X-Name-Mutant",
+                        "schema": {
+                            "maxLength": 25,
+                            "minLength": 1,
+                            "pattern": "^[a-zA-Z0-9]*$",
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseStats"
+                                }
+                            }
+                        },
+                        "description": "200 response"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MsgRsErrorDef"
+                                }
+                            }
+                        },
+                        "description": "400 response"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MsgRsErrorDef"
+                                }
+                            }
+                        },
+                        "description": "500 response"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "x-amazon-apigateway-integration": {
+                    "type": "aws_proxy",
+                    "uri": "${ext-bureau-datacredito-lambda-uri}",
+                    "responses": {
+                        "default": {
+                            "statusCode": "200"
+                        }
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "POST",
+                    "contentHandling": "CONVERT_TO_TEXT"
+                },
+                "summary": "Consultar estadísticas mutantes",
+                "description": "Recurso que realiza una estadística sencilla para validar el histórico de análisis."
+            }
+        },
+        "/mutant": {
+            "summary": "Consulta de estadísticas de mutantes",
+            "description": "Recurso que realiza una estadística sencilla para validar el histórico de análisis.",
+            "post": {
+                "requestBody": {
+                    "description": "Informacion del cliente a consultar",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestMutant"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "X-Name-Mutant",
+                        "schema": {
+                            "maxLength": 25,
+                            "minLength": 1,
+                            "pattern": "^[a-zA-Z0-9]*$",
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseMutant"
+                                }
+                            }
+                        },
+                        "description": "200 response"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MsgRsErrorDef"
+                                }
+                            }
+                        },
+                        "description": "400 response"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MsgRsErrorDef"
+                                }
+                            }
+                        },
+                        "description": "500 response"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "x-amazon-apigateway-integration": {
+                    "type": "aws_proxy",
+                    "uri": "${some-lambda-definition}",
+                    "responses": {
+                        "default": {
+                            "statusCode": "200"
+                        }
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "POST",
+                    "contentHandling": "CONVERT_TO_TEXT"
+                },
+                "summary": "Validar ADN",
+                "description": "Recurso que determina si una secuencia de ADN pertenece o no a un mutante."
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RequestMutant": {
+                "title": "Objeto solicitud validación mutante.",
+                "description": "Cadena de ADN",
+                "required": [
+                    "dna"
+                ],
+                "type": "object",
+                "properties": {
+                    "dna": {
+                        "description": "Secuencias de ADN",
+                        "minItems": 2,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ADN"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ADN": {
+                "minLength": 2,
+                "pattern": "^[ATCG]+$",
+                "type": "string"
+            },
+            "MsgRsErrorDef": {
+                "title": "Root Type for MsgRsErrorDef",
+                "description": "Root Type for MsgRsErrorDef",
+                "required": [
+                    "Status",
+                    "EndDt"
+                ],
+                "type": "object",
+                "properties": {
+                    "Status": {
+                        "$ref": "#/components/schemas/Status"
+                    },
+                    "EndDt": {
+                        "format": "date-time",
+                        "description": "Fecha Error",
+                        "maxLength": 20,
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Status": {
+                "required": [
+                    "ServerStatusCode",
+                    "Severity",
+                    "StatusCode",
+                    "StatusDesc"
+                ],
+                "type": "object",
+                "properties": {
+                    "ServerStatusCode": {
+                        "description": "Códigos de error string",
+                        "maxLength": 10,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]*$",
+                        "type": "string"
+                    },
+                    "Severity": {
+                        "description": "Severity Error",
+                        "maxLength": 10,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]*$",
+                        "type": "string"
+                    },
+                    "StatusCode": {
+                        "format": "int32",
+                        "description": "Códigos de error numérico",
+                        "maximum": 600,
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "StatusDesc": {
+                        "description": "Descripción del error",
+                        "maxLength": 200,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]*$",
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ResponseMutant": {
+                "required": [
+                    "isMutant"
+                ],
+                "type": "object",
+                "properties": {
+                    "isMutant": {
+                        "description": "Respuesta validación del ADN del individuo",
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ResponseStats": {
+                "required": [
+                    "count_mutant_dna",
+                    "count_human_dna",
+                    "ratio"
+                ],
+                "type": "object",
+                "properties": {
+                    "count_mutant_dna": {
+                        "format": "int32",
+                        "description": "Códigos de error numérico",
+                        "maximum": 600,
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "count_human_dna": {
+                        "format": "int32",
+                        "description": "Códigos de error numérico",
+                        "maximum": 600,
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "ratio": {
+                        "format": "int32",
+                        "description": "Códigos de error numérico",
+                        "maximum": 600,
+                        "minimum": 0,
+                        "type": "integer"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "x-api-key",
+                "in": "header"
+            }
+        }
+    },
+    "x-amazon-apigateway-policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": "*",
+                "Action": "execute-api:Invoke",
+                "Resource": "execute-api:/*/*/*"
+            },
+            {
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "execute-api:Invoke",
+                "Resource": "execute-api:/*/*/*",
+                "Condition": {
+                    "NotIpAddress": {
+                        "aws:SourceIp": [
+                            "${cidrs}"
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "x-amazon-apigateway-request-validators": {
+        "Validate body, query string parameters, and headers": {
+            "validateRequestParameters": true,
+            "validateRequestBody": true
+        }
+    }
+}

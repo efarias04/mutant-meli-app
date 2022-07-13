@@ -1,0 +1,96 @@
+{
+    "name": "prueba-tecnica-ml",
+    "version": "1.0.0",
+    "engines": {
+        "node": "14.17.0",
+        "npm": "6.14.13"
+    },
+    "description": "Prueba técnica backend Meli.",
+    "keywords": [
+        "Mercado Libre",
+        "Meli",
+        "actions",
+        "nodejs",
+        "express",
+        "Typescript",
+        "backend"
+    ],
+    "colaborators": "",
+    "private": true,
+    "license": "MIT",
+    "main": "build/bin/Server.js",
+    "bugs": {
+        "email": "edfernando.arias@outlook.com",
+        "url": "https://github.com/efarias04/issues"
+    },
+    "author": {
+        "email": "edfernando.arias@outlook.com",
+        "name": "Fernando Arias",
+        "url": "https://github.com/efarias04"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/efarias04/prueba-tecnica-ml.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "export DEBUG=app:* && node build/bin/Server.js",
+        "start-dev": "npm run build && export DEBUG=app:* && node ./build/bin/Server.js",
+        "dev": "nodemon --watch src -e ts,js --exec npm start-dev",
+        "test:file": "export $(cat test/.env-test | xargs) && mocha --timeout 10000 --require ts-node/register",
+        "test:only": "npm run test:file -- 'test/**/*.spec.ts'",
+        "test": "npm run lint && npm run test:only",
+        "coverage": "export $(cat test/.env-test | xargs) && nyc _mocha --timeout 10000 --require ts-node/register 'test/**/*.spec.ts'",
+        "coverage:report": "nyc report --reporter=lcov --reporter=text",
+        "coverage:web": "npm run coverage && http-server coverage/",
+        "lint": "tslint -c tslint.json -p tsconfig.json",
+        "lint:fix": "npm run lint -- --fix",
+        "debug": "DEBUG=* node ./build/bin/Server.js",
+        "performance": "./performance/run-clinic.sh",
+        "clean": "rm -rf .nyc_output coverage build .scannerwork performance/*.clinic-doctor*"
+    },
+    "dependencies": {
+        "@typegoose/typegoose": "^9.10.1",
+        "aws-serverless-express": "~3.3.6",
+        "cookie-parser": "~1.4.4",
+        "dateformat": "^3.0.3",
+        "debug": "~4.1.1",
+        "express": "~4.16.1",
+        "express-actuator": "^1.5.0",
+        "express-openapi-validate": "^0.5.1",
+        "express-openapi-validator": "^3.17.2",
+        "express-validator": "~5.3.1",
+        "http-server": "~0.11.1",
+        "mongoose": "^6.4.4",
+        "morgan": "~1.9.1",
+        "node-fetch": "~2.6.0",
+        "typescript": "^4.6.3"
+    },
+    "devDependencies": {
+        "@types/chai": "~4.1.7",
+        "@types/cookie-parser": "~1.4.1",
+        "@types/crypto-js": "~3.1.47",
+        "@types/dateformat": "^3.0.1",
+        "@types/debug": "~4.1.4",
+        "@types/express": "~4.17.0",
+        "@types/express-actuator": "^1.3.0",
+        "@types/mocha": "~5.2.7",
+        "@types/morgan": "~1.7.36",
+        "@types/nock": "~10.0.3",
+        "@types/node": "14.6.2",
+        "@types/node-fetch": "~2.5.0",
+        "@types/sinon": "~7.0.13",
+        "chai": "~4.2.0",
+        "chai-http": "~4.3.0",
+        "gulp": "~4.0.2",
+        "mocha": "~6.1.4",
+        "nock": "~10.0.6",
+        "nodemon": "~1.19.1",
+        "nyc": "~14.1.1",
+        "sinon": "~7.4.1",
+        "sonarqube-scanner": "~2.4.1",
+        "ts-node": "~8.2.0",
+        "tslint": "~5.17.0",
+        "typescript": "^4.6.3"
+    }
+}

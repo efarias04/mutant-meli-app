@@ -1,0 +1,79 @@
+name: Verify
+on:
+  push:
+    branches-ignore:
+      - "qa"
+      - "staging"
+      - "master"
+      - "main"
+env:
+  cache-name: npm-node-modules-dev
+jobs:
+  install-dev-dependencies:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Restore or save cache for dev Dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: npm-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-dev
+      - name: Install Dependencies
+        run: |
+          if [ -d "node_modules" ]; then
+            echo 'Dependencies already exists!'
+          else
+            sh ci-cd/install-dependencies.sh
+          fi
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: install-dev-dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Restore or save cache for dev Dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: npm-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-dev
+      - name: Install Dependencies
+        run: |
+          npm run build
+      - name: Persist Data
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
+  test:
+    runs-on: ubuntu-20.04
+    needs: install-dev-dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Restore or save cache for dev Dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: npm-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-dev
+      - name: Running Linter
+        run: npm run lint
+      - name: Running Test
+        run: |
+          npm run coverage && npm run coverage:report
+      - name: Persist Data
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage

@@ -1,0 +1,26 @@
+{
+  "reporter": [
+    "html",
+    "text-summary"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "include": [
+    "src/**/*.js",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.*",
+    "src/config.ts",
+    "src/bin/Server.ts",
+    "src/app.ts"
+  ],
+  "require": [
+    "ts-node/register"
+  ],
+  "sourceMap": true,
+  "instrument": true,
+  "check-coverage": false,
+  "cache": true
+}

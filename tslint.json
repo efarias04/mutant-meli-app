@@ -1,0 +1,31 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "trailing-comma": [
+      false
+    ],
+    "no-console": [
+      true,
+      "log"
+    ],
+    "whitespace": [
+      true,
+      "check-module"
+    ],
+    "no-unnecessary-type-assertion": [
+      false
+    ]
+  },
+  "rulesDirectory": []
+}

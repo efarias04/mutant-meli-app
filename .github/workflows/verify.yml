@@ -5,7 +5,6 @@ on:
       - "qa"
       - "staging"
       - "master"
-      - "main"
 env:
   cache-name: npm-node-modules-dev
 jobs:

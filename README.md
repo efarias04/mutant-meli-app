@@ -93,10 +93,16 @@ It is recommended to install the following versions for the correct operation of
 _Follow the steps as shown below._
 
 1. Clone the repo
-
+   ```sh
+   git clone https://github.com/efarias04/mutant-meli-app.git
+   ```
 2. Install NPM packages
    ```sh
    npm install
+   ```
+3. set your host connection database MongoDB to evariable:
+   ```sh
+   DATABASE_CONNECTION
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

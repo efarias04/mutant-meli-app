@@ -22,7 +22,6 @@ export default class MutantService {
 
     public static async validateDNA(req: Request, res: Response) {
         try {
-            debug('OIGGAAAAA HPTA: %d', config.consecutiveMinimumSequence);
             const request = req.body as IRequestMutant;
             debug('the body data: %o', request.dna);
             const matrixNormalized = UtilsMatrix.normalizeMatriz(request.dna);

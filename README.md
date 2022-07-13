@@ -100,7 +100,7 @@ _Follow the steps as shown below._
    ```sh
    npm install
    ```
-3. set your host connection database MongoDB to evariable:
+3. set your host connection database MongoDB to variable:
    ```sh
    DATABASE_CONNECTION
    ```

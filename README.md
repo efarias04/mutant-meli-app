@@ -50,7 +50,7 @@
 This is a backend technical test for a position in Mercado Libre. 
 
 Why?:
-* I want to improve my Backend skills.
+* I want to improve my Backend skills. 
 * To learn new technologies.
 
 <p align="right">(<a href="#top">back to top</a>)</p>

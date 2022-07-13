@@ -108,7 +108,7 @@ _Follow the steps as shown below._
    ```sh
    npm run start-dev
    ```
-5. Test your API. _please view the 'Usage' section in your local environment_
+5. Test your API. _please view the 'Usage' section an d test in your local environment_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

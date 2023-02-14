@@ -19,8 +19,8 @@ const debug = debugLib('app:MutantService');
 const TIME_ZONE = 'yyyy-mm-dd\'T\'HH:MM:ss';
 
 export default class MutantService {
-    
-    /** 
+
+    /**
      * Check validation DNA and return response
      * @param  {Request} req
      * @param  {Response} res

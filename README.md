@@ -181,7 +181,7 @@ Distributed under the MIT License.
 5. MongoDB: It is a NoSQL database, which allows high traffic, horizontal scaling and a dynamic scheme ideal for robust developments. In addition, there are no relationships with other entities.
 6. Heroku: It is a cloud platform, which allows you to host APIs with a complete, robust and secure free layer.
 7. The suggested design pattern for this solution is the "Strategy Pattern" given that the inputs and outputs are similar, what changes is the way in which each one performs its validation.
-8. SOLID principles applied
+8. SOLID principles applied.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

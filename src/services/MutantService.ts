@@ -20,6 +20,11 @@ const TIME_ZONE = 'yyyy-mm-dd\'T\'HH:MM:ss';
 
 export default class MutantService {
 
+    /**
+     * Check validation DNA and return response
+     * @param  {Request} req
+     * @param  {Response} res
+     */
     public static async validateDNA(req: Request, res: Response) {
         try {
             const request = req.body as IRequestMutant;
@@ -45,6 +50,12 @@ export default class MutantService {
         }
     }
 
+    /**
+     * Get stats DNA validation
+     * @param  {Request} req
+     * @param  {Response} res
+     * @returns Promise
+     */
     public static async getStats(req: Request, res: Response): Promise<any> {
 
         const db = new DatabaseService(new MongoService());
@@ -57,6 +68,11 @@ export default class MutantService {
         });
     }
 
+    /**
+     * In base to DNA detect if is mutant or human
+     * @param  {string[][]} dna
+     * @returns Promise
+     */
     private static async isMutant(dna: string [][]): Promise<boolean> {
 
         if(dna.length < config.consecutiveMinimumSequence) {
